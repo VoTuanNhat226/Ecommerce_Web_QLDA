@@ -43,15 +43,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void addOrUpdate(Product p, List<MultipartFile> image) {
         this.productRepo.addOrUpdate(p);
-
-        if (image != null && !image.isEmpty()) {
+        boolean hasValidImage = image != null && image.stream().anyMatch(img -> img != null && !img.isEmpty());
+        if (hasValidImage) {
 
             List<Image> currentImages = this.imgService.getProductImage(p.getId());
 
             for (Image img : currentImages) {
                 this.imgService.deleteImageById(img.getId());
             }
-            
+
             for (MultipartFile img : image) {
                 Image i = new Image();
                 //i.setImage(img.getName());
@@ -59,6 +59,8 @@ public class ProductServiceImpl implements ProductService {
                 i.setFile(img);
                 this.imgService.addImage(i);
             }
+        }else{
+            System.out.println("TỆP RỖNG RỒI");
         }
     }
 

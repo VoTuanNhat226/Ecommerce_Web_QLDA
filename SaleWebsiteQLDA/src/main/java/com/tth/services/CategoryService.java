@@ -18,4 +18,9 @@ public interface CategoryService {
     public List<Category> getCates();
 
     public Category getCategoryById(int id);
+
+    public void addOrUpdateCate(Category c);
+
+    public void deleteCategory(int id);
+
 }

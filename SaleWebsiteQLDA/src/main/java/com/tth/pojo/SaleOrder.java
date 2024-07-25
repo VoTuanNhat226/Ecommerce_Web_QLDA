@@ -50,7 +50,7 @@ public class SaleOrder implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "orderId")
     private Set<OrderDetail> orderDetailSet;
 
     public SaleOrder() {

@@ -78,7 +78,7 @@ public class Product implements Serializable {
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "productId")
     private Set<Image> imageSet;
     @JoinColumn(name = "brand_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -86,11 +86,11 @@ public class Product implements Serializable {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Category categoryId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "productId")
     private Set<ProductTag> productTagSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "productId")
     private Set<Comment> commentSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "productId")
     private Set<OrderDetail> orderDetailSet;
 
     @Transient

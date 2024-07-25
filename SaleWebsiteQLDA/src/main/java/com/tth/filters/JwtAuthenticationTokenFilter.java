@@ -4,8 +4,6 @@
  */
 package com.tth.filters;
 
-
-
 import com.tth.pojo.User;
 import com.tth.components.JwtService;
 import com.tth.services.UserService;
@@ -31,14 +29,14 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
  *
  * @author tongh
  */
-public class JwtAuthenticationTokenFilter extends UsernamePasswordAuthenticationFilter{
-    
+public class JwtAuthenticationTokenFilter extends UsernamePasswordAuthenticationFilter {
+
     private final static String TOKEN_HEADER = "authorization";
     @Autowired
     private JwtService jwtService;
     @Autowired
     private UserService userService;
-    
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -52,10 +50,10 @@ public class JwtAuthenticationTokenFilter extends UsernamePasswordAuthentication
                 boolean accountNonExpired = true;
                 boolean credentialsNonExpired = true;
                 boolean accountNonLocked = true;
+                System.out.println("TRINH TONG HIEP:   " + user.getRoleId().getRoleName());
 
                 Set<GrantedAuthority> authorities = new HashSet<>();
                 authorities.add(new SimpleGrantedAuthority( user.getRoleId().getRoleName()));
-
                 UserDetails userDetail = new org.springframework.security.core.userdetails.User(username, user.getPassword(), enabled, accountNonExpired,
                         credentialsNonExpired, accountNonLocked, authorities);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetail,

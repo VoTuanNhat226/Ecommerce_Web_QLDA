@@ -18,4 +18,9 @@ public interface CategoryRepository {
     public Category getCategoryById(int id);
 
     public List<Category> getCates();
+
+    public void addOrUpdateCate(Category cate);
+
+    public void deleteCategory(int id);
+
 }

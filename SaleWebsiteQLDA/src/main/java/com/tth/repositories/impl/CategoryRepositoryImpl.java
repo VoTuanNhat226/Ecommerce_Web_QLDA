@@ -45,4 +45,20 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         Session s = this.factory.getObject().getCurrentSession();
         return s.get(Category.class, id);
     }
+
+    public void addOrUpdateCate(Category c) {
+        Session s = this.factory.getObject().getCurrentSession();
+        if (c.getId() != null) {
+            s.update(c);
+        } else {
+            s.save(c);
+        }
+    }
+
+    @Override
+    public void deleteCategory(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Category c = this.getCategoryById(id);
+        s.delete(c);
+    }
 }

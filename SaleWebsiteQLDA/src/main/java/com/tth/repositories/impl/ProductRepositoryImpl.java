@@ -19,6 +19,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -95,7 +96,9 @@ public class ProductRepositoryImpl implements ProductRepository {
         }
 
         List<Product> products = query.getResultList();
-
+        for (Product product : products) {
+            Hibernate.initialize(product.getImageSet());
+        }
         return products;
     }
 
@@ -111,7 +114,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     public boolean addOrUpdate(Product p) {
         Session s = this.factory.getObject().getCurrentSession();
         p.setCreatedDate(new Date());
-        if (p.getId() != null && p.getId() > 0 ) {
+        if (p.getId() != null && p.getId() > 0) {
             s.update(p);
 
         } else {

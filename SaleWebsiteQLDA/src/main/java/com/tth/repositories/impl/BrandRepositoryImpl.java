@@ -28,7 +28,7 @@ public class BrandRepositoryImpl implements BrandRepository{
     private LocalSessionFactoryBean factory;
     
     @Override
-    public Brand getBrandgoryById(int id) {
+    public Brand getBrandById(int id) {
         Session s = this.factory.getObject().getCurrentSession();
         return s.get(Brand.class, id);
     }
@@ -39,6 +39,23 @@ public class BrandRepositoryImpl implements BrandRepository{
         Query q = s.createNamedQuery("Brand.findAll");
         
         return q.getResultList();
+    }
+
+    @Override
+    public void addOrUpdateBrand(Brand b) {
+        Session s = this.factory.getObject().getCurrentSession();
+        if (b.getId() != null) {
+            s.update(b);
+        } else {
+            s.save(b);
+        }
+    }
+
+    @Override
+    public void deleteBrand(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Brand b = this.getBrandById(id);
+        s.delete(b);
     }
     
 }

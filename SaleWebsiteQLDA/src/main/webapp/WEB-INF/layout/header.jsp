@@ -18,14 +18,23 @@
                 <li>
                     <a class="nav-link" href="<c:url value="/"/>">Trang chủ</a>
                 </li>
+
+                <li>
+                    <a class="nav-link" href="<c:url value="/manage-products" />">Quản lý sản phẩm</a>
+
+                </li>
+                <li>
+                    <a class="nav-link" href="<c:url value="/manage-brands" />">Quản lý nhãn hàng</a>
+
+                </li>
+
+                <li>
+                    <a class="nav-link" href="<c:url value="/manage-brands" />">Quản lý tài khoản</a>
+
+                </li>
                 <li>
                     <a class="nav-link" href="<c:url value="/stats"/>">Thống kê</a>
                 </li>
-                <li>
-                    <a class="btn btn-success" href="<c:url value="/products" />">Thêm sản phẩm</a>
-
-                </li>
-
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
                         <li>
