@@ -4,11 +4,8 @@
  */
 package com.tth.controllers;
 
-import com.tth.pojo.Product;
-import com.tth.services.BrandService;
+import com.tth.pojo.Category;
 import com.tth.services.CategoryService;
-import com.tth.services.ProductService;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
@@ -28,45 +25,46 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author tongh
  */
+
 @Controller
-public class ProductController {
-
+public class CategoryController {
+    
     @Autowired
-    private ProductService prodService;
-
-    @GetMapping("/products")
+    private CategoryService cateService;
+    
+    @GetMapping("/categories")
     public String createView(Model model) {
-        model.addAttribute("product", new Product());
-        return "products";
+        model.addAttribute("category", new Category());
+        return "categories";
     }
 
-    @PostMapping("/products")
-    public String createProduct(@ModelAttribute(value = "product") @Valid Product p,
-            BindingResult rs, @RequestParam List<MultipartFile> image) {
+    @PostMapping("/categories")
+    public String createCategory(@ModelAttribute(value = "category") @Valid Category p,
+            BindingResult rs) {
         if (!rs.hasErrors()) {
             try {
                 //p.setCreatedDate(new Date());
-                this.prodService.addOrUpdate(p, image);
-                return "redirect:/";
+                this.cateService.addOrUpdateCate(p);
+                return "redirect:/manage-categories";
             } catch (Exception ex) {
                 System.err.println(ex.getMessage());
             }
         }
 
-        return "products";
+        return "categories";
     }
 
-    @GetMapping("/products/{productId}")
-    public String updateView(Model model, @PathVariable(value = "productId") int id) {
-        model.addAttribute("product", this.prodService.getProductById(id));
+    @GetMapping("/categories/{categoryId}")
+    public String updateView(Model model, @PathVariable(value = "categoryId") int id) {
+        model.addAttribute("category", this.cateService.getCategoryById(id));
 
-        return "products";
+        return "categories";
     }
     
-    @RequestMapping("/manage-products")
+    @RequestMapping("/manage-categories")
     public String ProductManagement(Model model,@RequestParam Map<String, String> params) {
         
-        model.addAttribute("products", this.prodService.getProducts(params));
-        return "manageProducts";
+        model.addAttribute("categories", this.cateService.getCates());
+        return "manageCategories";
     }
 }

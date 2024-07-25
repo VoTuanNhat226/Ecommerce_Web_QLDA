@@ -82,9 +82,9 @@ public class User implements Serializable {
     @Size(max = 255)
     @Column(name = "avatar")
     private String avatar;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "userId")
     private Set<SaleOrder> saleOrderSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "userId")
     private Set<Comment> commentSet;
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne

@@ -12,7 +12,13 @@ import java.util.List;
  * @author tongh
  */
 public interface BrandService {
+
     public List<Brand> getBrands();
 
-    public Brand getBrandgoryById(int id);
+    public Brand getBrandById(int id);
+
+    public void addOrUpdateBrand(Brand b);
+
+    public void deleteBrand(int id);
+
 }

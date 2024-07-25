@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <h5 class="card-title">${countProduct}</h5>
                     <p class="card-text">Sản phẩm</p>
-                    <a href="#" class="btn btn-primary">Chi tiết</a>
+                    <a href="<c:url value="/manage-products" />" class="btn btn-primary">Chi tiết</a>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <h5 class="card-title">${countCate}</h5>
                     <p class="card-text">danh mục</p>
-                    <a href="#" class="btn btn-primary">Chi tiết</a>
+                    <a href="<c:url value="/manage-categories" />" class="btn btn-primary">Chi tiết</a>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Thống kê</h5>
                     <p class="card-text">Bảng thống kê</p>
-                    <a href="#" class="btn btn-primary">Chi tiết</a>
+                    <a href="<c:url value="/stats"/>" class="btn btn-primary">Chi tiết</a>
                 </div>
             </div>
         </div>

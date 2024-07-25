@@ -4,12 +4,8 @@
  */
 package com.tth.controllers;
 
-import com.tth.pojo.Product;
+import com.tth.pojo.Brand;
 import com.tth.services.BrandService;
-import com.tth.services.CategoryService;
-import com.tth.services.ProductService;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,51 +18,50 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
  * @author tongh
  */
+
 @Controller
-public class ProductController {
-
+public class BrandController {
+    
     @Autowired
-    private ProductService prodService;
-
-    @GetMapping("/products")
+    private BrandService brandService;
+    
+    @GetMapping("/brands")
     public String createView(Model model) {
-        model.addAttribute("product", new Product());
-        return "products";
+        model.addAttribute("brand", new Brand());
+        return "brands";
     }
 
-    @PostMapping("/products")
-    public String createProduct(@ModelAttribute(value = "product") @Valid Product p,
-            BindingResult rs, @RequestParam List<MultipartFile> image) {
+    @PostMapping("/brands")
+    public String createCategory(@ModelAttribute(value = "brand") @Valid Brand p,
+            BindingResult rs) {
         if (!rs.hasErrors()) {
             try {
-                //p.setCreatedDate(new Date());
-                this.prodService.addOrUpdate(p, image);
-                return "redirect:/";
+                this.brandService.addOrUpdateBrand(p);
+                return "redirect:/manage-brands";
             } catch (Exception ex) {
                 System.err.println(ex.getMessage());
             }
         }
 
-        return "products";
+        return "brands";
     }
 
-    @GetMapping("/products/{productId}")
-    public String updateView(Model model, @PathVariable(value = "productId") int id) {
-        model.addAttribute("product", this.prodService.getProductById(id));
+    @GetMapping("/brands/{brandId}")
+    public String updateView(Model model, @PathVariable(value = "brandId") int id) {
+        model.addAttribute("brand", this.brandService.getBrandById(id));
 
-        return "products";
+        return "brands";
     }
     
-    @RequestMapping("/manage-products")
+    @RequestMapping("/manage-brands")
     public String ProductManagement(Model model,@RequestParam Map<String, String> params) {
         
-        model.addAttribute("products", this.prodService.getProducts(params));
-        return "manageProducts";
+        model.addAttribute("brands", this.brandService.getBrands());
+        return "manageBrands";
     }
 }

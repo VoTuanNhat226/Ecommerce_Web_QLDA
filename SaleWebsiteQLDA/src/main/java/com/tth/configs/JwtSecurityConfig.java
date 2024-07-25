@@ -4,7 +4,6 @@
  */
 package com.tth.configs;
 
-
 import com.tth.filters.CustomAccessDeniedHandler;
 import com.tth.filters.JwtAuthenticationTokenFilter;
 import com.tth.filters.RestAuthenticationEntryPoint;
@@ -24,13 +23,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-
 /**
  *
  * @author tongh
  */
-
-
 @Configuration
 @EnableWebSecurity
 @EnableTransactionManagement
@@ -38,8 +34,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
     "com.tth.controllers",
     "com.tth.repositories",
     "com.tth.services",
-    "com.tth.components",
-})
+    "com.tth.components",})
 @Order(1)
 public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -86,13 +81,20 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/products/").permitAll();
         http.authorizeRequests().antMatchers("/api/products/**").permitAll();
         http.authorizeRequests().antMatchers("/api/categories/").permitAll();
+        http.authorizeRequests().antMatchers("/api/categories/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/brands/").permitAll();
+        http.authorizeRequests().antMatchers("/api/brands/**").permitAll();
         http.authorizeRequests().antMatchers("/api/users/").permitAll();
+
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/**/comments/").permitAll();
         http.antMatcher("/api/**").httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-                .antMatchers(HttpMethod.POST, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-                .antMatchers(HttpMethod.DELETE, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')").and()
+                //                .antMatchers(HttpMethod.DELETE, "/api/products/**").permitAll()
+                //                .antMatchers(HttpMethod.DELETE, "/api/categories/**").permitAll()
+                //                .antMatchers(HttpMethod.DELETE, "/api/brands/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.POST, "/api/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.DELETE, "/api/**").access("hasRole('ROLE_ADMIN')").and()
                 .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
     }
