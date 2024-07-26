@@ -35,7 +35,7 @@
                 <div class="card-body">
                     <h5 class="card-title">${countUser}</h5>
                     <p class="card-text">Thành viên</p>
-                    <a href="#" class="btn btn-primary">Chi tiết</a>
+                    <a href="<c:url value="/manage-users"/>" class="btn btn-primary">Chi tiết</a>
                 </div>
             </div>
         </div>

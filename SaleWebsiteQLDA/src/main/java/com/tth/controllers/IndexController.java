@@ -9,6 +9,7 @@ import com.tth.services.CategoryService;
 import com.tth.services.ProductService;
 import com.tth.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -28,19 +29,21 @@ public class IndexController {
 
     @Autowired
     private CategoryService cateService;
-    
+
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private BrandService brandService;
 
+    
+    
     @ModelAttribute
     public void commonAttr(Model model) {
         model.addAttribute("categories", this.cateService.getCates());
         model.addAttribute("brands", this.brandService.getBrands());
     }
-    
+
     @RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("countProduct", this.ProductService.countProduct());

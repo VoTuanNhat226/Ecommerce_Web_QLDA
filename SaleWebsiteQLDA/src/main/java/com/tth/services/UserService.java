@@ -5,6 +5,7 @@
 package com.tth.services;
 
 import com.tth.pojo.User;
+import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -20,5 +21,11 @@ public interface UserService extends UserDetailsService {
     public Boolean authUser(String username, String password);
 
     public long countUser();
+
+    public List<User> getUsers();
+
+    public void addOrUpdateUser(User u);
+
+    public void deleteUser(int id);
 
 }

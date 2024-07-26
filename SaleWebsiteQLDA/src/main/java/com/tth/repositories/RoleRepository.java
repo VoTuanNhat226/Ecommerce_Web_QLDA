@@ -4,22 +4,13 @@
  */
 package com.tth.repositories;
 
-import com.tth.pojo.Brand;
+import com.tth.pojo.Role;
 import java.util.List;
 
 /**
  *
  * @author tongh
  */
-public interface BrandRepository {
-
-    public Brand getBrandById(int id);
-
-    public List<Brand> getBrands();
-
-    public void addOrUpdateBrand(Brand b);
-
-    public void deleteBrand(int id);
-
-    public long countBrand();
+public interface RoleRepository {
+    public List<Role> getRole();
 }

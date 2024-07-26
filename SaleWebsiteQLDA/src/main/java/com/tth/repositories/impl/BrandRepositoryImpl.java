@@ -19,14 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author tongh
  */
-
 @Repository
 @Transactional
-public class BrandRepositoryImpl implements BrandRepository{
+public class BrandRepositoryImpl implements BrandRepository {
 
     @Autowired
     private LocalSessionFactoryBean factory;
-    
+
     @Override
     public Brand getBrandById(int id) {
         Session s = this.factory.getObject().getCurrentSession();
@@ -37,7 +36,7 @@ public class BrandRepositoryImpl implements BrandRepository{
     public List<Brand> getBrands() {
         Session s = this.factory.getObject().getCurrentSession();
         Query q = s.createNamedQuery("Brand.findAll");
-        
+
         return q.getResultList();
     }
 
@@ -57,5 +56,12 @@ public class BrandRepositoryImpl implements BrandRepository{
         Brand b = this.getBrandById(id);
         s.delete(b);
     }
-    
+
+    @Override
+    public long countBrand() {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query<Long> p = s.createQuery("SELECT COUNT(c.id) FROM Brand c", Long.class);
+        return p.uniqueResult();
+    }
+
 }

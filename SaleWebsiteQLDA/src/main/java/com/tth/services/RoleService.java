@@ -4,23 +4,15 @@
  */
 package com.tth.services;
 
-import com.tth.pojo.Brand;
+import com.tth.pojo.Role;
 import java.util.List;
 
 /**
  *
  * @author tongh
  */
-public interface BrandService {
-
-    public List<Brand> getBrands();
-
-    public Brand getBrandById(int id);
-
-    public void addOrUpdateBrand(Brand b);
-
-    public void deleteBrand(int id);
-
-    public long countBrand();
-
+public interface RoleService {
+    
+    public List<Role> getRole();
+    
 }

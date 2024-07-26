@@ -6,6 +6,8 @@ package com.tth.repositories.impl;
 
 import com.tth.pojo.User;
 import com.tth.repositories.UserRepository;
+import java.util.Date;
+import java.util.List;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +57,31 @@ public class UserRepositoryImpl implements UserRepository {
         Session s = this.factory.getObject().getCurrentSession();
         Query<Long> p = s.createQuery("SELECT COUNT(u.id) FROM User u", Long.class);
         return p.uniqueResult();
+    }
+
+    @Override
+    public List<User> getUsers() {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createNamedQuery("User.findAll");
+
+        return q.getResultList();
+    }
+
+    @Override
+    public void addOrUpdateUser(User u) {
+        u.setCreatedDate(new Date());
+        Session s = this.factory.getObject().getCurrentSession();
+        if (u.getId() != null) {
+            s.update(u);
+        } else {
+            s.save(u);
+        }
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        User u = this.getUserById(id);
+        s.delete(u);
     }
 }

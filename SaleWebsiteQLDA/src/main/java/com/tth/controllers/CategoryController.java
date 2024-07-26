@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +32,9 @@ public class CategoryController {
     
     @Autowired
     private CategoryService cateService;
+    
+    @Autowired
+    private Environment env;
     
     @GetMapping("/categories")
     public String createView(Model model) {
@@ -62,9 +66,13 @@ public class CategoryController {
     }
     
     @RequestMapping("/manage-categories")
-    public String ProductManagement(Model model,@RequestParam Map<String, String> params) {
+    public String CategoryManagement(Model model,@RequestParam Map<String, String> params) {
         
         model.addAttribute("categories", this.cateService.getCates());
+        
+        int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
+        long count = this.cateService.countCate();
+        model.addAttribute("count", Math.ceil(count * 1.0 / pageSize));
         return "manageCategories";
     }
 }

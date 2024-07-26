@@ -58,4 +58,9 @@ public class BrandServiceImpl implements BrandService {
         this.brandRepo.deleteBrand(id);
     }
 
+    @Override
+    public long countBrand() {
+        return this.brandRepo.countBrand();
+    }
+
 }

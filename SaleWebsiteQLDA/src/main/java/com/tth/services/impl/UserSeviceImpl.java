@@ -8,6 +8,7 @@ import com.tth.pojo.User;
 import com.tth.repositories.UserRepository;
 import com.tth.services.UserService;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -61,6 +62,22 @@ public class UserSeviceImpl implements UserService {
     @Override
     public long countUser() {
         return this.userRepo.countUser();
+    }
+
+    @Override
+    public List<User> getUsers() {
+        return this.userRepo.getUsers();
+    }
+
+    @Override
+    public void addOrUpdateUser(User u) {
+        u.setAvatar("https://res.cloudinary.com/dsbkju7j9/image/upload/v1719163511/bshktjhrrdzspkm7u301.png");
+        this.userRepo.addOrUpdateUser(u);
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        this.userRepo.deleteUser(id);
     }
 
 }
