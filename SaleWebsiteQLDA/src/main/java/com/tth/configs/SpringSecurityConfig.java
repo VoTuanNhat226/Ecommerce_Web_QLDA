@@ -4,8 +4,6 @@
  */
 package com.tth.configs;
 
-
-
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +30,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
     "com.tth.controllers",
     "com.tth.repositories",
     "com.tth.services",
-    "com.tth.components",
-})
+    "com.tth.components",})
 
 @Order(2)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -62,17 +59,35 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return cloudinary;
     }
 
-   @Override
+    @Override
     protected void configure(HttpSecurity http)
             throws Exception {
         http.formLogin().usernameParameter("username").passwordParameter("password");
 
         http.formLogin().defaultSuccessUrl("/")
                 .failureUrl("/login?error");
-        http.logout().logoutSuccessUrl("/login");
+        http.logout().logoutSuccessUrl("/");
 
         http.exceptionHandling()
                 .accessDeniedPage("/login?accessDenied");
+        http.authorizeRequests().antMatchers("/manage-products")
+                .access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/manage-categories")
+                .access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/manage-brands")
+                .access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/manage-users")
+                .access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/stats")
+                .access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/brands")
+                .access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/products")
+                .access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/categories")
+                .access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/users")
+                .access("hasRole('ROLE_ADMIN')");
 //        http.authorizeRequests().antMatchers("/").permitAll()
 //                .antMatchers("/**/add")
 //                .access("hasRole('ROLE_ADMIN')");
@@ -82,4 +97,3 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
-

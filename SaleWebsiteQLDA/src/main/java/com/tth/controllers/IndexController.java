@@ -49,7 +49,7 @@ public class IndexController {
         model.addAttribute("countProduct", this.ProductService.countProduct());
         model.addAttribute("countCate", this.cateService.countCate());
         model.addAttribute("countUser", this.userService.countUser());
-
+        model.addAttribute("countBrand", this.brandService.countBrand());
         return "index";
     }
 }
