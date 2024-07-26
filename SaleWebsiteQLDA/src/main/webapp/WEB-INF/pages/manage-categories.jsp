@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1 class="text-center text-info mt-1">QUẢN TRỊ DANH MỤC</h1>
+<h1 class="text-center text-info mt-1">QUẢN LÝ DANH MỤC</h1>
 <div>
     <a class="btn btn-success" href="<c:url value="/categories" />">Add Category</a>
 </div>

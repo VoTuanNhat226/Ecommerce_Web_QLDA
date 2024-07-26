@@ -5,6 +5,7 @@
 package com.tth.repositories;
 
 import com.tth.pojo.User;
+import java.util.List;
 
 /**
  *
@@ -19,5 +20,11 @@ public interface UserRepository {
     public Boolean authUser(String username, String password);
 
     public long countUser();
+    
+    public List<User> getUsers();
+
+    public void addOrUpdateUser(User u);
+    
+    public void deleteUser(int id);
 
 }

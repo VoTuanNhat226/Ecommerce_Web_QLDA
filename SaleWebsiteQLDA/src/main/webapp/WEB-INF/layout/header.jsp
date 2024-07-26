@@ -9,85 +9,46 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand " href="#">BoardingHouse</a>
+        <a class="navbar-brand " href="#">HNĐ Website</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav">
-                <li>
-                    <a class="nav-link" href="<c:url value="/"/>">Trang chủ</a>
-                </li>
-
-                <li>
-                    <a class="nav-link" href="<c:url value="/manage-products" />">Quản lý sản phẩm</a>
-
-                </li>
-                <li>
-                    <a class="nav-link" href="<c:url value="/manage-brands" />">Quản lý nhãn hàng</a>
-
-                </li>
-
-                <li>
-                    <a class="nav-link" href="<c:url value="/manage-brands" />">Quản lý tài khoản</a>
-
-                </li>
-                <li>
-                    <a class="nav-link" href="<c:url value="/stats"/>">Thống kê</a>
-                </li>
+            <ul class="navbar-nav d-flex justify-content-between w-100">
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
-                        <li>
-                            <a class="nav-link" href="<c:url value="/"/>">
-                                Chào ${pageContext.request.userPrincipal.name}!</a>
+                        <div class="d-flex">
 
-                        </li>
-                        <li><a class="nav-link" href="<c:url value="/logout"/>">Đăng xuất</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Quản lý tài khoản
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li>
-                                    <a class="dropdown-item" href="<c:url value="/approve-user"/>">Duyệt tài khoản </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="<c:url value="/users"/>">Sửa role/Xóa tài khoản</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Quản lý bài đăng
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li>
-                                    <a class="dropdown-item" href="<c:url value="/post"/>">Tất cả bài đăng</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="<c:url value="/lessor-post"/>">Bài đăng của chủ trọ</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="<c:url value="/customer-post"/>">Bài đăng của khách hàng</a>
-                                </li>
-                            </ul>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<c:url value='/manage-products' />">Quản lý sản phẩm</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<c:url value='/manage-brands' />">Quản lý nhãn hàng</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<c:url value='/manage-accounts' />">Quản lý tài khoản</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<c:url value='/stats' />">Thống kê</a>
+                            </li>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <li class="nav-item me-5 dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="<c:url value="/"/>">
+                                    Chào ${pageContext.request.userPrincipal.name}!</a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li><a class="nav-link" href="<c:url value="/logout"/>">Đăng xuất</a></li>
+                                </ul>
+                            </li>
 
-                        <li>
-                            <a class="nav-link" href="<c:url value="/stats"/>">Thống kê</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="<c:url value="/"/>">Quản lý bình luận</a>
-                        </li> 
+                        </div>
                     </c:when>
                     <c:when test="${pageContext.request.userPrincipal.name == null}">
-                        <li>
-                            <a class="nav-link" href="<c:url value="/login"/>">Đăng nhập</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value='/login' />">Đăng nhập</a>
                         </li>
                     </c:when>
                 </c:choose>
-
-
             </ul>
         </div>
     </div>

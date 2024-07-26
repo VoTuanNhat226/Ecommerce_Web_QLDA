@@ -8,7 +8,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1 class="text-center text-info mt-1">QUẢN TRỊ SẢN PHẨM</h1>
+<h1 class="text-center text-info mt-1">QUẢN LÝ SẢN PHẨM</h1>
+
+
+<ul class="pagination mt-1">
+    <c:forEach begin="1" end="${count}" var="i">
+        <c:url value="/manage-products" var="pageAction">
+            <c:param name="page" value="${i}"/>
+        </c:url>
+        <li class="page-item">
+            <a class="page-link" href="${pageAction}">${i}</a>
+        </li>
+    </c:forEach>
+</ul>
+
 <div>
     <a class="btn btn-success" href="<c:url value="/products" />">Add product</a>
 </div>

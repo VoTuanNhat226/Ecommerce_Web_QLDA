@@ -35,7 +35,17 @@
                 <div class="card-body">
                     <h5 class="card-title">${countUser}</h5>
                     <p class="card-text">Thành viên</p>
-                    <a href="#" class="btn btn-primary">Chi tiết</a>
+                    <a href="<c:url value="/manage-users"/>" class="btn btn-primary">Chi tiết</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 18rem;">
+                <img src="https://res.cloudinary.com/dsbkju7j9/image/upload/v1721993566/bpvbmqapmuedyxjvznq9.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${countBrand}</h5>
+                    <p class="card-text">Nhãn hàng</p>
+                    <a href="<c:url value="/manage-brands"/>" class="btn btn-primary">Chi tiết</a>
                 </div>
             </div>
         </div>

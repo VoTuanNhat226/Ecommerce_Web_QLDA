@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,9 @@ public class ProductController {
     @Autowired
     private ProductService prodService;
 
+    @Autowired
+    private Environment env;
+    
     @GetMapping("/products")
     public String createView(Model model) {
         model.addAttribute("product", new Product());
@@ -62,11 +66,14 @@ public class ProductController {
 
         return "products";
     }
-    
+
     @RequestMapping("/manage-products")
-    public String ProductManagement(Model model,@RequestParam Map<String, String> params) {
-        
+    public String ProductManagement(Model model, @RequestParam Map<String, String> params) {
+
         model.addAttribute("products", this.prodService.getProducts(params));
+        long pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
+        long count = this.prodService.countProduct();
+        model.addAttribute("count", Math.ceil(count * 1.0 / pageSize));
         return "manageProducts";
     }
 }
