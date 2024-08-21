@@ -4,6 +4,7 @@
  */
 package com.tth.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -86,10 +87,13 @@ public class Product implements Serializable {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Category categoryId;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "productId")
     private Set<ProductTag> productTagSet;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "productId")
     private Set<Comment> commentSet;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "productId")
     private Set<OrderDetail> orderDetailSet;
 

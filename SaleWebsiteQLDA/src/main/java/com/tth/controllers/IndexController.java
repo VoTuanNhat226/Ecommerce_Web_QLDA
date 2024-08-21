@@ -7,6 +7,7 @@ package com.tth.controllers;
 import com.tth.services.BrandService;
 import com.tth.services.CategoryService;
 import com.tth.services.ProductService;
+import com.tth.services.RoleService;
 import com.tth.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -35,11 +36,13 @@ public class IndexController {
 
     @Autowired
     private BrandService brandService;
+    
+    @Autowired
+    private RoleService roleService;
 
-    
-    
     @ModelAttribute
     public void commonAttr(Model model) {
+        model.addAttribute("role", this.roleService.getRole());
         model.addAttribute("categories", this.cateService.getCates());
         model.addAttribute("brands", this.brandService.getBrands());
     }
