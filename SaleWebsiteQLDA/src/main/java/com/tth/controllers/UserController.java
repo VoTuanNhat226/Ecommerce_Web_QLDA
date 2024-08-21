@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -33,10 +34,10 @@ public class UserController {
 
     @Autowired
     private RoleService roleService;
-    
+
     @Autowired
     private Environment env;
-    
+
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -44,7 +45,6 @@ public class UserController {
 
     @GetMapping("/users")
     public String createViewUser(Model model) {
-        model.addAttribute("role", this.roleService.getRole());
         model.addAttribute("user", new User());
         return "users";
     }
@@ -60,6 +60,12 @@ public class UserController {
                 System.err.println(ex.getMessage());
             }
         }
+        return "users";
+    }
+
+    @GetMapping("/users/{username}")
+    public String updateViewUser(Model model, @PathVariable(value = "username") String username) {
+        model.addAttribute("user", this.userService.getUserByUsername(username));
         return "users";
     }
 

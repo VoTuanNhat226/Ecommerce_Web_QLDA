@@ -74,6 +74,7 @@ public class Brand implements Serializable {
     @Size(max = 255)
     @Column(name = "name")
     private String name;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "brandId")
     private Set<Product> productSet;
     @Size(max = 255)

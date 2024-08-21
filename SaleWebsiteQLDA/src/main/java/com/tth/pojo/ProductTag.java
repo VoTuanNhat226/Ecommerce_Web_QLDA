@@ -4,6 +4,7 @@
  */
 package com.tth.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -37,9 +38,11 @@ public class ProductTag implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JsonIgnore
     @ManyToOne(optional = false)
     private Product productId;
     @JoinColumn(name = "tag_id", referencedColumnName = "id")
+    @JsonIgnore
     @ManyToOne(optional = false)
     private Tag tagId;
 
